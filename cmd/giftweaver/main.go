@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -17,12 +16,7 @@ func main() {
 }
 
 func run() {
-	token := os.Getenv("TELEGRAM_APITOKEN")
-	if token == "" {
-		fmt.Println("api token not available")
-		return
-	}
-
+	token := mustEnv("TELEGRAM_APITOKEN")
 	bot, err := tgbotapi.NewBotAPI(token)
 	if err != nil {
 		log.Panic(err)
@@ -66,4 +60,12 @@ func run() {
 			log.Panic(err)
 		}
 	}
+}
+
+func mustEnv(key string) string {
+	v := os.Getenv(key)
+	if v == "" {
+		log.Fatalf("missing required env var: %s", key)
+	}
+	return v
 }
