@@ -10,14 +10,19 @@ import (
 )
 
 func main() {
-	// Load .env into environment
-	err := godotenv.Load()
-	if err != nil {
-		log.Println("No .env file found")
+	// Load .env ONLY if it exists
+	_ = godotenv.Load()
+
+	run()
+}
+
+func run() {
+	token := os.Getenv("TELEGRAM_APITOKEN")
+	if token == "" {
+		fmt.Println("api token not available")
+		return
 	}
 
-	token := os.Getenv("TELEGRAM_APITOKEN")
-	fmt.Println(token)
 	bot, err := tgbotapi.NewBotAPI(token)
 	if err != nil {
 		log.Panic(err)
