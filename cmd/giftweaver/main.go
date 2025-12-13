@@ -6,6 +6,7 @@ import (
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/joho/godotenv"
+	"github.com/ximura/giftweaver/internal/telegram"
 )
 
 func main() {
@@ -40,25 +41,23 @@ func run() {
 			continue
 		}
 
-		// Create a new MessageConfig. We don't have text yet,
-		// so we leave it empty.
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
+		msg := update.Message
+		telegram.HandleMessage(&telegram.Message{
+			MessageID: msg.MessageID,
+			Text:      msg.Text,
+			Chat: telegram.Chat{
+				ID: msg.Chat.ID,
+			},
+			From: telegram.User{
+				ID:        msg.From.ID,
+				Username:  msg.From.UserName,
+				FirstName: msg.From.FirstName,
+			},
+		})
 
-		// Extract the command from the Message.
-		switch update.Message.Command() {
-		case "help":
-			msg.Text = "I understand /sayhi and /status."
-		case "sayhi":
-			msg.Text = "Hi :)"
-		case "status":
-			msg.Text = "I'm ok."
-		default:
-			msg.Text = "I don't know that command"
-		}
-
-		if _, err := bot.Send(msg); err != nil {
-			log.Panic(err)
-		}
+		// if _, err := bot.Send(msg); err != nil {
+		// 	log.Panic(err)
+		// }
 	}
 }
 
