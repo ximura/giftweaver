@@ -1,5 +1,8 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index.go" }
+  "crons": [
+    {
+      "path": "/api/run-santa",
+      "schedule": "0 9 20 12 *"
+    }
   ]
 }
