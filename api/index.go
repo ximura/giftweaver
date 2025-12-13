@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 
-	"github.com/ximura/giftweaver/internal/telegram"
+	"github.com/ximura/giftweaver/telegram"
 )
 
 func Handler(w http.ResponseWriter, r *http.Request) {

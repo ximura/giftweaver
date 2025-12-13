@@ -6,7 +6,7 @@ import (
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/joho/godotenv"
-	"github.com/ximura/giftweaver/internal/telegram"
+	"github.com/ximura/giftweaver/telegram"
 )
 
 func main() {
