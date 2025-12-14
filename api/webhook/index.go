@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/ximura/giftweaver/internal/repository"
+	"github.com/ximura/giftweaver/pkg/repository"
 	"github.com/ximura/giftweaver/telegram"
 )
 

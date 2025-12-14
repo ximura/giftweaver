@@ -3,7 +3,7 @@ package telegram
 import (
 	"context"
 
-	"github.com/ximura/giftweaver/internal/repository"
+	"github.com/ximura/giftweaver/pkg/repository"
 )
 
 type Update struct {
