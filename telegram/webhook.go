@@ -1,9 +1,9 @@
 package telegram
 
 import (
-	"encoding/json"
-	"io"
-	"net/http"
+	"context"
+
+	"github.com/ximura/giftweaver/internal/repository"
 )
 
 type Update struct {
@@ -28,32 +28,14 @@ type User struct {
 	FirstName string `json:"first_name"`
 }
 
-func HandleWebhook(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
-	body, err := io.ReadAll(r.Body)
-	if err != nil {
-		http.Error(w, "failed to read body", http.StatusBadRequest)
-		return
-	}
-
-	var update Update
-	if err := json.Unmarshal(body, &update); err != nil {
-		http.Error(w, "invalid json", http.StatusBadRequest)
-		return
-	}
-
-	// Telegram sometimes sends updates without message (callbacks, etc.)
+func HandleWebhook(
+	ctx context.Context,
+	q *repository.Queries,
+	update Update,
+) error {
 	if update.Message == nil {
-		w.WriteHeader(http.StatusOK)
-		return
+		return nil
 	}
 
-	HandleMessage(update.Message)
-
-	// Telegram requires a 200 OK
-	w.WriteHeader(http.StatusOK)
+	return HandleMessage(update.Message)
 }
