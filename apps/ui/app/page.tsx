@@ -26,9 +26,9 @@ export default function Home() {
         {view === "landing" && (
           <>
             <h1 className="text-3xl font-bold text-center">🎅 Secret Santa</h1>
-            <button className="btn" onClick={() => setView("create")}>Create Room</button>
-            <button className="btn-secondary" onClick={() => setView("join")}>Join Room</button>
-            <button className="btn-outline" onClick={() => setView("about")}>About</button>
+            <button className="w-full bg-red-600 text-white py-2 rounded-xl font-medium;" onClick={() => setView("create")}>Create Room</button>
+            <button className="w-full bg-green-600 text-white py-2 rounded-xl font-medium;" onClick={() => setView("join")}>Join Room</button>
+            <button className="w-full border border-gray-300 py-2 rounded-xl" onClick={() => setView("about")}>About</button>
           </>
         )}
 
@@ -36,10 +36,10 @@ export default function Home() {
         {view === "create" && (
           <>
             <h2 className="text-xl font-semibold">Create Room</h2>
-            <input className="input" placeholder="Room name" value={name} onChange={e => setName(e.target.value)} />
-            <textarea className="input" placeholder="Description (optional)" value={description} onChange={e => setDescription(e.target.value)} />
-            <button className="btn">Create & Get Link</button>
-            <button className="btn-ghost" onClick={() => setView("landing")}>Back</button>
+            <input className="border rounded-xl px-3 py-2" placeholder="Room name" value={name} onChange={e => setName(e.target.value)} />
+            <textarea className="border rounded-xl px-3 py-2" placeholder="Description (optional)" value={description} onChange={e => setDescription(e.target.value)} />
+            <button className="w-full bg-red-600 text-white py-2 rounded-xl font-medium;">Create & Get Link</button>
+            <button className="w-full text-gray-500 py-2" onClick={() => setView("landing")}>Back</button>
           </>
         )}
 
@@ -47,9 +47,9 @@ export default function Home() {
         {view === "join" && (
           <>
             <h2 className="text-xl font-semibold">Join Room</h2>
-            <input className="input" placeholder="Room ID" value={roomId} onChange={e => setRoomId(e.target.value)} />
-            <button className="btn">Join</button>
-            <button className="btn-ghost" onClick={() => setView("landing")}>Back</button>
+            <input className="border rounded-xl px-3 py-2" placeholder="Room ID" value={roomId} onChange={e => setRoomId(e.target.value)} />
+            <button className="w-full bg-red-600 text-white py-2 rounded-xl font-medium;">Join</button>
+            <button className="w-full text-gray-500 py-2" onClick={() => setView("landing")}>Back</button>
           </>
         )}
 
@@ -60,7 +60,7 @@ export default function Home() {
             <p className="text-sm text-gray-600">
               Organize Secret Santa gift exchanges directly inside Telegram.
             </p>
-            <button className="btn-ghost" onClick={() => setView("landing")}>Back</button>
+            <button className="w-full text-gray-500 py-2" onClick={() => setView("landing")}>Back</button>
           </>
         )}
       </div>
