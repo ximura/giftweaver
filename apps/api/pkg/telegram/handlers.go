@@ -1,6 +1,7 @@
 package telegram
 
 import (
+	"os"
 	"strings"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
@@ -25,7 +26,7 @@ func handleStart(update *tgbotapi.Update) (tgbotapi.MessageConfig, error) {
 	// Persist user + chat_id here
 	// saveUser(msg.From.ID, msg.Chat.ID)
 
-	url := "https://your-ui.vercel.app"
+	url := os.Getenv("UI_APP_URL")
 	btn := tgbotapi.InlineKeyboardButton{
 		Text: "🎁 Open Secret Santa",
 		URL:  &url,
