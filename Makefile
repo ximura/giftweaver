@@ -1,4 +1,4 @@
-MAIN_PACKAGE_PATH := ./apps/api/cmd/giftweaver
+MAIN_PACKAGE_PATH := ./cmd/giftweaver
 BINARY_NAME := giftweaver
 
 .DEFAULT_GOAL := build
