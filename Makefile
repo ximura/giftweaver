@@ -45,3 +45,8 @@ test:
 test/cover:
 	go test -v -race -buildvcs -coverprofile=./bin/coverage.out ./...
 	go tool cover -html=./bin/coverage.out
+
+## generate: run sqlc generator
+.PHONY: generate
+generate:
+	 docker run --rm -v $(shell pwd):/src -w /src sqlc/sqlc generate
