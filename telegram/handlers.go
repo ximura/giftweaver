@@ -4,22 +4,24 @@ import (
 	"strings"
 )
 
-func HandleMessage(msg *Message) {
+func HandleMessage(msg *Message) error {
 	text := strings.TrimSpace(msg.Text)
 
 	switch {
 	case text == "/start":
-		handleStart(msg)
+		return handleStart(msg)
 
 	case strings.HasPrefix(text, "/wish"):
-		handleWish(msg)
+		return handleWish(msg)
 
 	default:
 		sendMessage(msg.Chat.ID, "🎁 Send `/wish something` to add your gift wish.")
 	}
+
+	return nil
 }
 
-func handleStart(msg *Message) {
+func handleStart(msg *Message) error {
 	// Persist user + chat_id here
 	// saveUser(msg.From.ID, msg.Chat.ID)
 
@@ -27,16 +29,19 @@ func handleStart(msg *Message) {
 		msg.Chat.ID,
 		"🎅 Welcome to GiftWeaver!\n\nSend `/wish something` to add your gift wish.",
 	)
+
+	return nil
 }
 
-func handleWish(msg *Message) {
+func handleWish(msg *Message) error {
 	wish := strings.TrimSpace(strings.TrimPrefix(msg.Text, "/wish"))
 	if wish == "" {
 		sendMessage(msg.Chat.ID, "Please send `/wish <your gift wish>` 🎁")
-		return
+		return nil
 	}
 
 	// saveWish(msg.From.ID, wish)
 
 	sendMessage(msg.Chat.ID, "✅ Your wish has been saved!")
+	return nil
 }
